@@ -8,6 +8,8 @@ This repository hosts several spring-boot projects and resources for a lightning
 * [Tiny sample Project](#tiny_sample)
 * [How AutoConfiguration works](#autoconfig)
 * [Properties for almost everything](#properties)
+* [Delivery as executable jar](#executable_jar)
+* [Other noteworthy features](#noteworthy_features)
 
 ## <a name="resources"></a>Resources
 
@@ -99,7 +101,48 @@ There's a [property discovery mechanism][7] that allows for a multitude of ways 
 
 ![](/images/intellij_property_completion.png)
 
+To give you an idea what can be configured, here are some examples (in .yml format) :
 
+```yml
+# the application's name. useful when using discovery
+spring:
+  application:
+    name: vehicle-data
+
+# pick a specific port (default is 8080) or use 0 for a random port
+server:
+  port: 8888
+
+# instead of configuring an explicit logging framework, for small usecases you can use the generic spring boot logging configuration options
+logging:
+  level:
+    org.springframework.cloud: 'DEBUG'
+  pattern:
+    console: "%d{HH:mm:ss} %clr(%.-1level) %msg%n"
+```
+
+## <a name="executable_jar"></a>Delivery as executable jar
+
+Spring Initializr adds the spring-boot-maven-plugin to your pom.xml. This plugin can package your application into an executable jar when you run "mvn package". The executable jar is much bigger than the original jar because it contains all dependencies. This is a major selling point of Spring Boot because it facilitates rapid prototyping and developing microservices.
+
+## <a name="noteworthy_features"></a>Other noteworthy features
+
+* [developer tools][8]
+** automatic restart
+** remote update
+* YAML support
+* type-safe configuration properties
+* support (starters) for many typical components
+** sql databses
+** nosql databases
+** messaging
+** logging
+** caching
+** [auto-configured tests][9] (slices)
+* production-ready features (means actuator)
+* cloud foundry (and other cloud infrastructures) support
+
+Many more can be found in the [Spring Boot reference][0].
 
 
 [0]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle
@@ -110,3 +153,5 @@ There's a [property discovery mechanism][7] that allows for a multitude of ways 
 [5]: https://github.com/spring-projects/spring-boot/blob/v1.5.9.RELEASE/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration.java
 [6]: https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-developing-auto-configuration.html#boot-features-condition-annotations
 [7]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config
+[8]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-devtools
+[9]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-testing-spring-boot-applications-testing-autoconfigured-tests
