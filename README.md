@@ -5,7 +5,7 @@ This repository hosts several spring-boot projects and resources for a lightning
 # Table of Contents
 * [Resources](#resources)
 * [Introduction](#intro)
-* [Tiny Sample Project](#tiny_sample)
+* [Tiny sample Project](#tiny_sample)
 
 ## <a name="resources"></a>Resources
 
@@ -15,9 +15,7 @@ This repository hosts several spring-boot projects and resources for a lightning
 
 [Spring Initializr][2]
 
-[0]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle
-[1]: http://www.baeldung.com/spring-boot-custom-auto-configuration
-[2]: https://start.spring.io/
+[GitHub repository containing a custom starter][4]
 
 ## <a name="intro"></a>Introduction
 
@@ -42,3 +40,50 @@ From https://projects.spring.io/spring-boot/:
 ## <a name="tiny_sample"></a>Tiny sample project
 
 The code for this project is [here](../master/spring-boot-lightning_1).
+
+Note the following things:
+* the easiest way to get the maven references is to have spring-boot-starter-parent as parent pom
+* our only dependency is spring-boot-starter-web (ignore the test)
+* there a main class annotated with @SpringBootApplication
+* there is a small rest controller
+* the controller's end point can be accessed at http://localhost:8080/helloworld
+
+Questions:
+* Where does the tomcat come from?
+* Where does the tomcat's port come from?
+* How come there is a working DispatcherServlet?
+* How come there is a WebApplicationContext?
+
+[Take a look][3] at the pains you usually have to go through to configure and understand Spring web MVC.
+
+Here's the source of spring-boot's 1.5.9 [WebMvcAutoConfiguration.java][5]. That's the main configuration class orchestrating the AutoConfiguration aspect of spring boot's web starter. That configuration does the heavy lifting to configure most of what you need to integrate web-mvc into your project. 
+
+Spring does this via condition annotations ([documentation][6]). They will only be loaded into your application context if their condition evaluates to true. That makes it clear how you can provide your own properties and beans to change default behavior and customize autoconfigurable features.
+
+F.e. you can have your own InternalResourceViewResolver bean. If you don't, Spring adds this one for you:
+
+```java
+@Bean
+		@ConditionalOnMissingBean
+		public InternalResourceViewResolver defaultViewResolver() {
+			InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+			resolver.setPrefix(this.mvcProperties.getView().getPrefix());
+			resolver.setSuffix(this.mvcProperties.getView().getSuffix());
+			return resolver;
+		}
+```
+
+Here's a short list of possible condition annotations:
+
+!(/images/condition_annotations.png)
+
+They can be useful even in regular spring applications to turn on or off specific beans and configurations.
+
+
+[0]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle
+[1]: http://www.baeldung.com/spring-boot-custom-auto-configuration
+[2]: https://start.spring.io/
+[3]: https://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/mvc.html#mvc-servlet
+[4]: https://github.com/martinfoersterling/spring-boot-autoremote
+[5]: https://github.com/spring-projects/spring-boot/blob/v1.5.9.RELEASE/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration.java
+[6]: https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-developing-auto-configuration.html#boot-features-condition-annotations
