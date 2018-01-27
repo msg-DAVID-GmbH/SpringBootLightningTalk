@@ -13,8 +13,11 @@ This repository hosts several spring-boot projects and resources for a lightning
 
 [Create a Custom Auto-Configuration with Spring Boot][1]
 
+[Spring Initializr][2]
+
 [0]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle
 [1]: http://www.baeldung.com/spring-boot-custom-auto-configuration
+[2]: https://start.spring.io/
 
 ## <a name="intro"></a>Introduction
 
@@ -38,4 +41,4 @@ From https://projects.spring.io/spring-boot/:
 
 ## <a name="tiny_sample"></a>Tiny sample project
 
-The code for this project is [here](../blob/master/1_tiny_sample).
+The code for this project is [here](../blob/master/spring-boot-lightning_1).
