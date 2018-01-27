@@ -5,7 +5,7 @@ This repository hosts several spring-boot projects and resources for a lightning
 # Table of Contents
 * [Resources](#resources)
 * [Introduction](#intro)
-* [Tiny Sample Project](#tiny_sample)
+* [Tiny sample Project](#tiny_sample)
 
 ## <a name="resources"></a>Resources
 
@@ -15,9 +15,7 @@ This repository hosts several spring-boot projects and resources for a lightning
 
 [Spring Initializr][2]
 
-[0]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle
-[1]: http://www.baeldung.com/spring-boot-custom-auto-configuration
-[2]: https://start.spring.io/
+[GitHub repository containing a custom starter][4]
 
 ## <a name="intro"></a>Introduction
 
@@ -42,3 +40,27 @@ From https://projects.spring.io/spring-boot/:
 ## <a name="tiny_sample"></a>Tiny sample project
 
 The code for this project is [here](../master/spring-boot-lightning_1).
+
+Note the following things:
+* the easiest way to get the maven references is to have spring-boot-starter-parent as parent pom
+* our only dependency is spring-boot-starter-web (ignore the test)
+* there a main class annotated with @SpringBootApplication
+* there is a small rest controller
+* the controller's end point can be accessed at http://localhost:8080/helloworld
+
+Questions:
+* Where does the tomcat come from?
+* Where does the tomcat's port come from?
+* How come there is a working DispatcherServlet?
+* How come there is a WebApplicationContext?
+
+[Take a look][3] at the pains you usually have to go through to configure and understand Spring web MVC.
+
+Look at the source of WebMvcAutoConfiguration.java.
+
+
+[0]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle
+[1]: http://www.baeldung.com/spring-boot-custom-auto-configuration
+[2]: https://start.spring.io/
+[3]: https://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/mvc.html#mvc-servlet
+[4]: https://github.com/martinfoersterling/spring-boot-autoremote
