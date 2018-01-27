@@ -95,7 +95,7 @@ The versions of entire features can be set as property in your pom.xml:
 	</properties>
 ```
 
-There's a [property discovery mechanism][7] that allows for a multitude of ways to configure your system. Some IDEs even have a property completion (similar to code completion) feature for spring boot property files:
+There's a [property discovery mechanism][7] that allows for a multitude of ways to configure your system. Some IDEs even have a property completion (similar to code completion) feature for spring boot property files with documentation on top:
 
 ![](/images/intellij_property_completion.png)
 
