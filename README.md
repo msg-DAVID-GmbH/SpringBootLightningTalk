@@ -6,6 +6,8 @@ This repository hosts several spring-boot projects and resources for a lightning
 * [Resources](#resources)
 * [Introduction](#intro)
 * [Tiny sample Project](#tiny_sample)
+* [How AutoConfiguration works](#autoconfig)
+* [Properties for almost everything](#properties)
 
 ## <a name="resources"></a>Resources
 
@@ -54,6 +56,8 @@ Questions:
 * How come there is a working DispatcherServlet?
 * How come there is a WebApplicationContext?
 
+## <a name="autoconfig"></a>How AutoConfiguration works
+
 [Take a look][3] at the pains you usually have to go through to configure and understand Spring web MVC.
 
 Here's the source of spring-boot's 1.5.9 [WebMvcAutoConfiguration.java][5]. That's the main configuration class orchestrating the AutoConfiguration aspect of spring boot's web starter. That configuration does the heavy lifting to configure most of what you need to integrate web-mvc into your project. 
@@ -63,21 +67,25 @@ Spring does this via condition annotations ([documentation][6]). They will only 
 F.e. you can have your own InternalResourceViewResolver bean. If you don't, Spring adds this one for you:
 
 ```java
-@Bean
-		@ConditionalOnMissingBean
-		public InternalResourceViewResolver defaultViewResolver() {
-			InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-			resolver.setPrefix(this.mvcProperties.getView().getPrefix());
-			resolver.setSuffix(this.mvcProperties.getView().getSuffix());
-			return resolver;
-		}
+	@Bean
+	@ConditionalOnMissingBean
+	public InternalResourceViewResolver defaultViewResolver() {
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix(this.mvcProperties.getView().getPrefix());
+		resolver.setSuffix(this.mvcProperties.getView().getSuffix());
+		return resolver;
+	}
 ```
 
 Here's a short list of possible condition annotations:
 
-!(/images/condition_annotations.png)
+![](/images/condition_annotations.png)
 
 They can be useful even in regular spring applications to turn on or off specific beans and configurations.
+
+##  <a name="properties"></a>Properties for almost everything
+
+Spring boot promotes convention over configuration. If something doesn't work quite as you want, you could define your own beans and configurations. But before doing that, you should check whether there isn't a property you can set instead. The convention is to have an application.properties or applications.yml in your project root
 
 
 [0]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle
