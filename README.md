@@ -85,7 +85,21 @@ They can be useful even in regular spring applications to turn on or off specifi
 
 ##  <a name="properties"></a>Properties for almost everything
 
-Spring boot promotes convention over configuration. If something doesn't work quite as you want, you could define your own beans and configurations. But before doing that, you should check whether there isn't a property you can set instead. The convention is to have an application.properties or applications.yml in your project root
+Spring boot promotes convention over configuration. If something doesn't work quite as you want, you could define your own beans and configurations. But before doing that, you should check whether there isn't a property you can set instead. The convention is to have an application.properties or applications.yml in your project root. You get placeholder replacement and profile-dependent property loading out of the box, f.e. application-production.properties are only loaded when profile "production" is set.
+
+The versions of entire features can be set as property in your pom.xml:
+
+```xml
+	<properties>
+	    <spring-data-releasetrain.version>Fowler-SR2</spring-data-releasetrain.version>
+	</properties>
+```
+
+There's a [property discovery mechanism][7] that allows for a multitude of ways to configure your system. Some IDEs even have a property completion (similar to code completion) feature for spring boot property files:
+
+![](/images/intellij_property_completion.png)
+
+
 
 
 [0]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle
@@ -95,3 +109,4 @@ Spring boot promotes convention over configuration. If something doesn't work qu
 [4]: https://github.com/martinfoersterling/spring-boot-autoremote
 [5]: https://github.com/spring-projects/spring-boot/blob/v1.5.9.RELEASE/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration.java
 [6]: https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-developing-auto-configuration.html#boot-features-condition-annotations
+[7]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-external-config
