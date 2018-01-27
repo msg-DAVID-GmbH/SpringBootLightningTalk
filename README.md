@@ -128,17 +128,17 @@ Spring Initializr adds the spring-boot-maven-plugin to your pom.xml. This plugin
 ## <a name="noteworthy_features"></a>Other noteworthy features
 
 * [developer tools][8]
-** automatic restart
-** remote update
+  * automatic restart
+  * remote update
 * YAML support
 * type-safe configuration properties
 * support (starters) for many typical components
-** sql databses
-** nosql databases
-** messaging
-** logging
-** caching
-** [auto-configured tests][9] (slices)
+  * sql databses
+  * nosql databases
+  * messaging
+  * logging
+  * caching
+* [auto-configured tests][9] (slices)
 * production-ready features (means actuator)
 * cloud foundry (and other cloud infrastructures) support
 
