@@ -56,7 +56,9 @@ Questions:
 
 [Take a look][3] at the pains you usually have to go through to configure and understand Spring web MVC.
 
-Look at the source of WebMvcAutoConfiguration.java.
+Here's the source of spring-boot's 1.5.9 [WebMvcAutoConfiguration.java][5].
+
+That configuration does the heavy lifting to configure most of what you need to integrate web-mvc into your project. Spring does this via condition annotations ([documentation][6]).
 
 
 [0]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle
@@ -64,3 +66,5 @@ Look at the source of WebMvcAutoConfiguration.java.
 [2]: https://start.spring.io/
 [3]: https://docs.spring.io/spring/docs/3.2.x/spring-framework-reference/html/mvc.html#mvc-servlet
 [4]: https://github.com/martinfoersterling/spring-boot-autoremote
+[5]: https://github.com/spring-projects/spring-boot/blob/v1.5.9.RELEASE/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/web/WebMvcAutoConfiguration.java
+[6]: https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-developing-auto-configuration.html#boot-features-condition-annotations
