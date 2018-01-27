@@ -56,9 +56,28 @@ Questions:
 
 [Take a look][3] at the pains you usually have to go through to configure and understand Spring web MVC.
 
-Here's the source of spring-boot's 1.5.9 [WebMvcAutoConfiguration.java][5].
+Here's the source of spring-boot's 1.5.9 [WebMvcAutoConfiguration.java][5]. That's the main configuration class orchestrating the AutoConfiguration aspect of spring boot's web starter. That configuration does the heavy lifting to configure most of what you need to integrate web-mvc into your project. 
 
-That configuration does the heavy lifting to configure most of what you need to integrate web-mvc into your project. Spring does this via condition annotations ([documentation][6]).
+Spring does this via condition annotations ([documentation][6]). They will only be loaded into your application context if their condition evaluates to true. That makes it clear how you can provide your own properties and beans to change default behavior and customize autoconfigurable features.
+
+F.e. you can have your own InternalResourceViewResolver bean. If you don't, Spring adds this one for you:
+
+```java
+@Bean
+		@ConditionalOnMissingBean
+		public InternalResourceViewResolver defaultViewResolver() {
+			InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+			resolver.setPrefix(this.mvcProperties.getView().getPrefix());
+			resolver.setSuffix(this.mvcProperties.getView().getSuffix());
+			return resolver;
+		}
+```
+
+Here's a short list of possible condition annotations:
+
+!(/images/condition_annotations.png)
+
+They can be useful even in regular spring applications to turn on or off specific beans and configurations.
 
 
 [0]: https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle
