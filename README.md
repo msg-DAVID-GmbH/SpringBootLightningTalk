@@ -41,4 +41,4 @@ From https://projects.spring.io/spring-boot/:
 
 ## <a name="tiny_sample"></a>Tiny sample project
 
-The code for this project is [here](../blob/master/spring-boot-lightning_1).
+The code for this project is [here](../master/spring-boot-lightning_1).
